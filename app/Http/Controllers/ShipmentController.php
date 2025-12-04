@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use Inertia\Response;
 use App\Http\Requests\UserShipmentRequest;
 use App\Repositories\UserShipmentRepository;
 use App\Http\Resources\UserShipmentResource;
@@ -15,7 +16,7 @@ class ShipmentController extends Controller
         private EasyPostWebService $easyPostWebService
     ){}
 
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Shipments/Index', [
             'shipments' => UserShipmentResource::collection(
@@ -34,9 +35,9 @@ class ShipmentController extends Controller
         $user = auth()->user();
 
         $response = $this->easyPostWebService->createShipment(
-            $request->input('from'),
-            $request->input('to'),
-            $request->input('parcel'),
+            $request->validatedShipment()['from'],
+            $request->validatedShipment()['to'],
+            $request->validatedShipment()['parcel'],
             $user->reference
         );
 
@@ -49,7 +50,7 @@ class ShipmentController extends Controller
         );
     }
 
-    public function show(string $id)
+    public function show(string $id): Response
     {
         $shipment = $this->userShipmentRepository->findByShipmentId($id);
         $response = $this->easyPostWebService->retrieveShipment($shipment->shipment_id);

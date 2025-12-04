@@ -46,4 +46,14 @@ class UserShipmentRequest extends FormRequest
             'parcel.weight' => 'required|numeric|min:0'
         ];
     }
+
+
+    public function validatedShipment(): array
+    {
+        return [
+            'from' => $this->validated()['from'],
+            'to' => $this->validated()['to'],
+            'parcel' => $this->validated()['parcel'],
+        ];
+    }
 }
