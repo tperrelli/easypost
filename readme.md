@@ -86,7 +86,7 @@ npm run build
 For development with hot reload:
 
 ```bash
-npm run dev
+npm run dev (in your host, not in the container)
 ```
 
 ---
