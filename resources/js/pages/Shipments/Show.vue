@@ -19,6 +19,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 const props = defineProps({
     shipment: Object,
 });
+console.log(props.shipment)
 
 // function
 // TODO: implementar a funcionalidade de impressão
@@ -48,14 +49,14 @@ const printShipment = () => {
           <div class="shadow rounded-2xl p-6 space-y-4">
             <h2 class="text-xl font-semibold">To Address</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div><strong>Name:</strong> {{ props.shipment.to_address.name }}</div>
-              <div><strong>Street:</strong> {{ props.shipment.to_address.street1 }}</div>
-              <div><strong>City:</strong> {{ props.shipment.to_address.city }}</div>
-              <div><strong>State:</strong> {{ props.shipment.to_address.state }}</div>
-              <div><strong>ZIP:</strong> {{ props.shipment.to_address.zip }}</div>
-              <div><strong>Country:</strong> {{ props.shipment.to_address.country }}</div>
-              <div><strong>Phone:</strong> {{ props.shipment.to_address.phone }}</div>
-              <div><strong>Email:</strong> {{ props.shipment.to_address.email }}</div>
+              <div><strong>Name:</strong> {{ props.shipment.data.to_address.name }}</div>
+              <div><strong>Street:</strong> {{ props.shipment.data.to_address.street1 }}</div>
+              <div><strong>City:</strong> {{ props.shipment.data.to_address.city }}</div>
+              <div><strong>State:</strong> {{ props.shipment.data.to_address.state }}</div>
+              <div><strong>ZIP:</strong> {{ props.shipment.data.to_address.zip }}</div>
+              <div><strong>Country:</strong> {{ props.shipment.data.to_address.country }}</div>
+              <div><strong>Phone:</strong> {{ props.shipment.data.to_address.phone }}</div>
+              <div><strong>Email:</strong> {{ props.shipment.data.to_address.email }}</div>
             </div>
           </div>
       
@@ -63,14 +64,14 @@ const printShipment = () => {
           <div class="shadow rounded-2xl p-6 space-y-4">
             <h2 class="text-xl font-semibold">From Address</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div><strong>Name:</strong> {{ props.shipment.from_address.name }}</div>
-              <div><strong>Street:</strong> {{ props.shipment.from_address.street1 }}</div>
-              <div><strong>City:</strong> {{ props.shipment.from_address.city }}</div>
-              <div><strong>State:</strong> {{ props.shipment.from_address.state }}</div>
-              <div><strong>ZIP:</strong> {{ props.shipment.from_address.zip }}</div>
-              <div><strong>Country:</strong> {{ props.shipment.from_address.country }}</div>
-              <div><strong>Phone:</strong> {{ props.shipment.from_address.phone }}</div>
-              <div><strong>Email:</strong> {{ props.shipment.from_address.email }}</div>
+              <div><strong>Name:</strong> {{ props.shipment.data.from_address.name }}</div>
+              <div><strong>Street:</strong> {{ props.shipment.data.from_address.street1 }}</div>
+              <div><strong>City:</strong> {{ props.shipment.data.from_address.city }}</div>
+              <div><strong>State:</strong> {{ props.shipment.data.from_address.state }}</div>
+              <div><strong>ZIP:</strong> {{ props.shipment.data.from_address.zip }}</div>
+              <div><strong>Country:</strong> {{ props.shipment.data.from_address.country }}</div>
+              <div><strong>Phone:</strong> {{ props.shipment.data.from_address.phone }}</div>
+              <div><strong>Email:</strong> {{ props.shipment.data.from_address.email }}</div>
             </div>
           </div>
       
@@ -78,10 +79,10 @@ const printShipment = () => {
           <div class="shadow rounded-2xl p-6 space-y-4">
             <h2 class="text-xl font-semibold">Parcel</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div><strong>Length:</strong> {{ props.shipment.parcel.length }}</div>
-              <div><strong>Width:</strong> {{ props.shipment.parcel.width }}</div>
-              <div><strong>Height:</strong> {{ props.shipment.parcel.height }}</div>
-              <div><strong>Weight:</strong> {{ props.shipment.parcel.weight }}</div>
+              <div><strong>Length:</strong> {{ props.shipment.data.parcel.length }}</div>
+              <div><strong>Width:</strong> {{ props.shipment.data.parcel.width }}</div>
+              <div><strong>Height:</strong> {{ props.shipment.data.parcel.height }}</div>
+              <div><strong>Weight:</strong> {{ props.shipment.data.parcel.weight }}</div>
             </div>
           </div>
       

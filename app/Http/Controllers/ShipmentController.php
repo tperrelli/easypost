@@ -56,7 +56,7 @@ class ShipmentController extends Controller
         $response = $this->easyPostWebService->retrieveShipment($shipment->shipment_id);
 
         return Inertia::render('Shipments/Show', [
-            'shipment' => $response
+            'shipment' => new UserShipmentResource($response)
         ]);
     }
 }
