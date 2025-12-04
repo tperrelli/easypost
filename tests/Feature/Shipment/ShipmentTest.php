@@ -92,7 +92,7 @@ class ShipmentTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson(route('shipments.store'), $payload);
+        $response = $this->actingAs($this->user)->postJson(route('shipments.store'), $payload);
 
         $response->assertStatus(201)
                  ->assertJsonFragment([
@@ -111,13 +111,23 @@ class ShipmentTest extends TestCase
     /** @test */
     public function show_returns_show_page_with_shipment()
     {
+        $mockService = Mockery::mock(EasyPostWebService::class);
+        $mockService->shouldReceive('retrieveShipment')
+            ->once()
+            ->andReturn([
+                'id' => 'shp_test_123',
+                'status' => 'created',
+                'shipment_id' => 'shp_test_123'
+            ]);
+
+        $this->app->instance(EasyPostWebService::class, $mockService);
+
         $shipment = UserShipment::factory()->create([
             'user_id' => $this->user->id,
-            'shipment_id' => 'shp_123',
+            'shipment_id' => 'shp_test_123',
         ]);
 
-        $response = $this->get(route('shipments.show', $shipment->shipment_id));
-
+        $response = $this->get(route('shipments.show', $shipment->id));
         $response->assertStatus(200)
                  ->assertInertia(fn (Assert $page) =>
                      $page->component('Shipments/Show')
