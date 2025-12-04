@@ -130,9 +130,13 @@ Once the containers are running:
 * Laravel should be served via NGINX
 * API endpoints and Inertia pages are accessible normally
 
+### 9. Login with the following test user
+* username test@example.com
+* passwd: password
+
 ---
 
-### 9. Stopping the Project
+### 10. Stopping the Project
 
 To stop all containers:
 
@@ -149,7 +153,7 @@ docker-compose up -d
 
 ---
 
-### 10. Useful Commands
+### 11. Useful Commands
 
 * Enter PHP container: `docker exec -it laravel-app bash`
 * Run artisan commands: `php artisan <command>`
