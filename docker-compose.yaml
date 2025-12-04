@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+
+  # ========================
+  # PHP 8.3 + Composer
+  # ========================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel-app
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel
+
+  # ========================
+  # NGINX Server
+  # ========================
+  nginx:
+    image: nginx:stable
+    container_name: laravel-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - laravel
+
+  # ========================
+  # MySQL 8
+  # ========================
+  mysql:
+    image: mysql:8.0
+    container_name: laravel-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - laravel
+
+networks:
+  laravel:
+
+volumes:
+  mysql_data:
