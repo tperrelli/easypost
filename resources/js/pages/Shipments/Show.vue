@@ -19,7 +19,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 const props = defineProps({
     shipment: Object,
 });
-console.log(props.shipment)
 
 const form = useForm({});
 

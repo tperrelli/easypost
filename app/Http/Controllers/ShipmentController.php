@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Http\JsonResponse;
 use App\Services\ShipmentService;
 use App\Http\Requests\UserShipmentRequest;
 use App\Repositories\UserShipmentRepository;
@@ -30,26 +31,27 @@ class ShipmentController extends Controller
         return Inertia::render('Shipments/Create');
     }
 
-    public function store(UserShipmentRequest $request): UserShipmentResource
+    public function store(UserShipmentRequest $request): JsonResponse
     {
         $user = $request->user();
+        $data = $request->validatedShipment();
 
-        return UserShipmentResource::make(
+        return (new UserShipmentResource(
             $this->shipmentService->createShipment(
-                $request->validatedShipment()['from'],
-                $request->validatedShipment()['to'],
-                $request->validatedShipment()['parcel'],
+                $data['from'],
+                $data['to'],
+                $data['parcel'],
                 $user
             )
-        );
+        ))->response()->setStatusCode(201);
     }
 
     public function show(string $id): Response
     {
-        $shipment = $this->shipmentService->findShipment($id);
+        $dto = $this->shipmentService->findShipment($id);
 
         return Inertia::render('Shipments/Show', [
-            'shipment' => new UserShipmentResource($shipment)
+            'shipment' => new UserShipmentResource($dto),
         ]);
     }
 
