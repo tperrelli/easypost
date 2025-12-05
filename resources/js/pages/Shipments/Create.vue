@@ -16,18 +16,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     }
 ];
 
-// const form = reactive({
-//   to: {
-//     name: '', street1: '', city: '', state: '', zip: '', country: '', phone: '', email: ''
-//   },
-//   from: {
-//     name: '', street1: '', city: '', state: '', zip: '', country: '', phone: '', email: ''
-//   },
-//   parcel: {
-//     length: '', width: '', height: '', weight: ''
-//   }
-// })
-
 const form = useForm({
     to: {
         name: '',
@@ -65,8 +53,7 @@ const submit = () => {
 
         onSuccess: () => {
             form.reset();
-            // Opcional: navegar para index
-            // router.visit(route('shipments.index'))
+            router.visit(shipments.index().url);
         },
 
         onError: () => {

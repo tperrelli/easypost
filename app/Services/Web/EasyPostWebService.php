@@ -85,17 +85,15 @@ class EasyPostWebService
     {
         try {
 
-            $reponse = Http::post($this->url("shipments/{$shipmentId}/label"))
-                ->withBasicAuth($this->apiKey, '')
-                ->withBody(json_encode([
-                    'file_format' => $fileFormat
-                ]))
-                ->withHeader('Content-Type', 'application/json')
-                ->send();
+            $response = Http::withBasicAuth($this->apiKey, '')
+                ->withHeaders(['Content-Type' => 'application/json'])
+                ->get($this->url("shipments/{$shipmentId}/label?file_format={$fileFormat}"));
         
-            if ($reponse->failed()) {
-                throw new \Exception('EasyPost API error: ' . $reponse->body());
+            if ($response->failed()) {
+                throw new \Exception('EasyPost API error: ' . $response->body());
             }
+
+            return $response->json();
 
         } catch (\Throwable $e) {
             throw new \Exception('Error printing label: ' . $e->getMessage());
@@ -107,6 +105,3 @@ class EasyPostWebService
         return $this->baseUrl . ltrim($url, '/');
     }
 }
-
-// curl -X GET https://api.easypost.com/v2/shipments/shp_.../label?file_format=ZPL \
-//   -u "EASYPOST_API_KEY":

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import shipments from '@/routes/shipments';
-import { Head } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -21,10 +21,21 @@ const props = defineProps({
 });
 console.log(props.shipment)
 
+const form = useForm({});
+
 // function
 // TODO: implementar a funcionalidade de impressão
 const printShipment = () => {
-    window.print();
+    // window.print();
+    form.post(shipments.print(props.shipment?.data.id).url, {
+        preserveScroll: true,
+        onSuccess: () => {
+            console.log('Print request sent successfully');
+        },
+        onError: () => {
+            console.log('Error sending print request');
+        }
+    });
 };
 
 </script>

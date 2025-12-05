@@ -59,4 +59,13 @@ class ShipmentController extends Controller
             'shipment' => new UserShipmentResource($response)
         ]);
     }
+
+    public function print(string $shipmentId)
+    {
+        $labelData = $this->easyPostWebService->printLabel($shipmentId, 'PDF');
+
+        return response($labelData, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="label.pdf"');
+    }
 }
