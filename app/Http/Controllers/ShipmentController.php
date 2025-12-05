@@ -25,7 +25,7 @@ class ShipmentController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Shipments/Create');
     }
