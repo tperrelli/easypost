@@ -6,6 +6,7 @@ use App\Models\User;
 use App\DTO\ShipmentDTO;
 use App\Repositories\UserShipmentRepository;
 use App\Services\Web\EasyPostWebService;
+use Illuminate\Support\Facades\Cache;
 
 class ShipmentService
 {
@@ -32,9 +33,15 @@ class ShipmentService
     {
         $shipment = $this->userShipmentRepository->findByShipmentId($id);
 
+        $cacheKey = "shipment_remote_{$shipment->shipment_id}";
+
+        $remote = Cache::remember($cacheKey, now()->addMinutes(60), function () use ($shipment) {
+            return $this->easyPostWebService->retrieveShipment($shipment->shipment_id);
+        });
+
         return new ShipmentDTO(
             local: $shipment,
-            remote: $this->easyPostWebService->retrieveShipment($shipment->shipment_id)
+            remote: $remote
         );
     }
 
