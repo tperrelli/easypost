@@ -86,50 +86,50 @@ const submit = () => {
     
                 <div>
                     <input v-model="form.to.street1" placeholder="Street" class="input" />
-                    <span v-if="form.errors['to_address.street1']" class="text-red-500 text-sm">
-                    {{ form.errors['to_address.street1'] }}
+                    <span v-if="form.errors['to.street1']" class="text-red-500 text-sm">
+                    {{ form.errors['to.street1'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.to.city" placeholder="City" class="input" />
-                    <span v-if="form.errors['to_address.city']" class="text-red-500 text-sm">
-                    {{ form.errors['to_address.city'] }}
+                    <span v-if="form.errors['to.city']" class="text-red-500 text-sm">
+                    {{ form.errors['to.city'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.to.state" placeholder="State" class="input" />
-                    <span v-if="form.errors['to_address.state']" class="text-red-500 text-sm">
-                    {{ form.errors['to_address.state'] }}
+                    <span v-if="form.errors['to.state']" class="text-red-500 text-sm">
+                    {{ form.errors['to.state'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.to.zip" placeholder="ZIP" class="input" />
-                    <span v-if="form.errors['to_address.zip']" class="text-red-500 text-sm">
-                    {{ form.errors['to_address.zip'] }}
+                    <span v-if="form.errors['to.zip']" class="text-red-500 text-sm">
+                    {{ form.errors['to.zip'] }}
                     </span>
                 </div>
                 
                 <div>
                     <input v-model="form.to.country" placeholder="Country" class="input" />
-                    <span v-if="form.errors['to_address.country']" class="text-red-500 text-sm">
-                    {{ form.errors['to_address.country'] }}
+                    <span v-if="form.errors['to.country']" class="text-red-500 text-sm">
+                    {{ form.errors['to.country'] }}
                     </span>
                 </div>
               
                 <div>
                     <input v-model="form.to.phone" placeholder="Phone" class="input" />
-                    <span v-if="form.errors['to_address.phone']" class="text-red-500 text-sm">
-                    {{ form.errors['to_address.phone'] }}
+                    <span v-if="form.errors['to.phone']" class="text-red-500 text-sm">
+                    {{ form.errors['to.phone'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.to.email" placeholder="Email" class="input" />
-                    <span v-if="form.errors['to_address.email']" class="text-red-500 text-sm">
-                    {{ form.errors['to_address.email'] }}
+                    <span v-if="form.errors['to.email']" class="text-red-500 text-sm">
+                    {{ form.errors['to.email'] }}
                     </span>
                 </div>
             </div>
@@ -142,57 +142,57 @@ const submit = () => {
 
                 <div>
                     <input v-model="form.from.name" placeholder="Name" class="input" />
-                    <span v-if="form.errors['from_address.name']" class="text-red-500 text-sm">
-                    {{ form.errors['from_address.name'] }}
+                    <span v-if="form.errors['from.name']" class="text-red-500 text-sm">
+                    {{ form.errors['from.name'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.from.street1" placeholder="Street" class="input" />
-                    <span v-if="form.errors['from_address.street1']" class="text-red-500 text-sm">
-                    {{ form.errors['from_address.street1'] }}
+                    <span v-if="form.errors['from.street1']" class="text-red-500 text-sm">
+                    {{ form.errors['from.street1'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.from.city" placeholder="City" class="input" />
-                    <span v-if="form.errors['from_address.city']" class="text-red-500 text-sm">
-                    {{ form.errors['from_address.city'] }}
+                    <span v-if="form.errors['from.city']" class="text-red-500 text-sm">
+                    {{ form.errors['from.city'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.from.state" placeholder="State" class="input" />
-                    <span v-if="form.errors['from_address.state']" class="text-red-500 text-sm">
-                    {{ form.errors['from_address.state'] }}
+                    <span v-if="form.errors['from.state']" class="text-red-500 text-sm">
+                    {{ form.errors['from.state'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.from.zip" placeholder="ZIP" class="input" />
-                    <span v-if="form.errors['from_address.zip']" class="text-red-500 text-sm">
-                    {{ form.errors['from_address.zip'] }}
+                    <span v-if="form.errors['from.zip']" class="text-red-500 text-sm">
+                    {{ form.errors['from.zip'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.from.country" placeholder="Country" class="input" />
-                    <span v-if="form.errors['from_address.country']" class="text-red-500 text-sm">
-                    {{ form.errors['from_address.country'] }}
+                    <span v-if="form.errors['from.country']" class="text-red-500 text-sm">
+                    {{ form.errors['from.country'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.from.phone" placeholder="Phone" class="input" />
-                    <span v-if="form.errors['from_address.phone']" class="text-red-500 text-sm">
-                    {{ form.errors['from_address.phone'] }}
+                    <span v-if="form.errors['from.phone']" class="text-red-500 text-sm">
+                    {{ form.errors['from.phone'] }}
                     </span>
                 </div>
 
                 <div>
                     <input v-model="form.from.email" placeholder="Email" class="input" />
-                    <span v-if="form.errors['from_address.email']" class="text-red-500 text-sm">
-                    {{ form.errors['from_address.email'] }}
+                    <span v-if="form.errors['from.email']" class="text-red-500 text-sm">
+                    {{ form.errors['from.email'] }}
                     </span>
                 </div>
             </div>
