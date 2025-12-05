@@ -32,7 +32,7 @@ class ShipmentController extends Controller
 
     public function store(UserShipmentRequest $request): UserShipmentResource
     {
-        $user = auth()->user();
+        $user = $request->user();
 
         $response = $this->easyPostWebService->createShipment(
             $request->validatedShipment()['from'],
