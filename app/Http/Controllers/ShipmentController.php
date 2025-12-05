@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Services\ShipmentService;
 use App\Http\Requests\UserShipmentRequest;
 use App\Repositories\UserShipmentRepository;
 use App\Http\Resources\UserShipmentResource;
-use App\Services\Web\EasyPostWebService;
 
 class ShipmentController extends Controller
 {
     public function __construct(
         private UserShipmentRepository $userShipmentRepository, 
-        private EasyPostWebService $easyPostWebService
+        private ShipmentService $shipmentService,
     ){}
 
     public function index(): Response
@@ -34,35 +34,28 @@ class ShipmentController extends Controller
     {
         $user = $request->user();
 
-        $response = $this->easyPostWebService->createShipment(
-            $request->validatedShipment()['from'],
-            $request->validatedShipment()['to'],
-            $request->validatedShipment()['parcel'],
-            $user->reference
-        );
-
         return UserShipmentResource::make(
-            $this->userShipmentRepository->create([
-                'status' => $response['status'],
-                'user_id' => $user->id,
-                'shipment_id' => $response['id'],
-            ])
+            $this->shipmentService->createShipment(
+                $request->validatedShipment()['from'],
+                $request->validatedShipment()['to'],
+                $request->validatedShipment()['parcel'],
+                $user
+            )
         );
     }
 
     public function show(string $id): Response
     {
-        $shipment = $this->userShipmentRepository->findByShipmentId($id);
-        $response = $this->easyPostWebService->retrieveShipment($shipment->shipment_id);
+        $shipment = $this->shipmentService->findShipment($id);
 
         return Inertia::render('Shipments/Show', [
-            'shipment' => new UserShipmentResource($response)
+            'shipment' => new UserShipmentResource($shipment)
         ]);
     }
 
     public function print(string $shipmentId)
     {
-        $labelData = $this->easyPostWebService->printLabel($shipmentId, 'PDF');
+        $labelData = $this->shipmentService->printLabel($shipmentId, 'PDF');
 
         return response($labelData, 200)
             ->header('Content-Type', 'application/pdf')
