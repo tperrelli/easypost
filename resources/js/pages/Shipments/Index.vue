@@ -50,6 +50,7 @@ function goToCreate() {
                                 <th class="p-3">Tracking</th>
                                 <th class="p-3">Status</th>
                                 <th class="p-3">Criado</th>
+                                <th class="p-3">#</th>
                             </tr>
                         </thead>
 
@@ -63,6 +64,14 @@ function goToCreate() {
                                 <td class="p-3">{{ s.tracking }}</td>
                                 <td class="p-3">{{ s.status }}</td>
                                 <td class="p-3">{{ s.created_at }}</td>
+                                <td class="p-3">
+                                    <a
+                                        :href="shipments.show(s.id).url"
+                                        class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                                    >
+                                        Details
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
